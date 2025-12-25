@@ -98,3 +98,50 @@ select.text-control option {
 .btn:active {
     transform: scale(0.97);
 }
+.label {
+    text-align: left;
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+.btn-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.secondary {
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+}
+
+.outline {
+    background: transparent;
+    border: 1px solid #fff;
+}
+
+.toggle {
+    background: linear-gradient(90deg, #222, #555);
+}
+
+/* LIGHT MODE */
+body.light {
+    background: #f4f4f4;
+}
+
+body.light .container {
+    background: linear-gradient(135deg, #ffffff, #dcdcdc);
+}
+
+body.light .app-container {
+    background: #ffffff;
+    color: #000;
+}
+
+body.light .text-control {
+    background: #f1f1f1;
+    color: #000;
+    border: 1px solid #ccc;
+}
