@@ -1,26 +1,29 @@
 const text = document.getElementById("textToConvert");
 const convertBtn = document.getElementById("convertBtn");
+const error = document.querySelector(".error-para");
 
-convertBtn.addEventListener('click', function () {
+convertBtn.addEventListener("click", () => {
     const speechSynth = window.speechSynthesis;
-    const enteredText = text.value;
-    const error = document.querySelector('.error-para');
+    const enteredText = text.value.trim();
 
-    if (!speechSynth.speaking &&
-        !enteredText.trim().length) {
-        error.textContent = `Nothing to Convert! 
-        Enter text in the text area.`
+    if (!enteredText) {
+        error.textContent = "Nothing to Convert! Enter text in the text area.";
+        return;
     }
-    
-    if (!speechSynth.speaking && enteredText.trim().length) {
-        error.textContent = "";
-        const newUtter =
-            new SpeechSynthesisUtterance(enteredText);
-        speechSynth.speak(newUtter);
-        convertBtn.textContent = "Sound is Playing..."
+
+    error.textContent = "";
+
+    // Stop any ongoing speech
+    if (speechSynth.speaking) {
+        speechSynth.cancel();
     }
-    
-    setTimeout(() => {
-        convertBtn.textContent = "Play Converted Sound"
-    }, 5000);
+
+    const utterance = new SpeechSynthesisUtterance(enteredText);
+    convertBtn.textContent = "Sound is Playing...";
+
+    utterance.onend = () => {
+        convertBtn.textContent = "Play Converted Sound";
+    };
+
+    speechSynth.speak(utterance);
 });
